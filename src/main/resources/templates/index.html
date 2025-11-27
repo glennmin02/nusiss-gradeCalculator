@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUS-ISS GPA Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-4 sm:p-6">
+<div class="max-w-3xl mx-auto">
+    <div class="bg-white rounded-lg shadow p-5 sm:p-8 mb-6">
+        <h1 class="text-2xl sm:text-3xl font-semibold text-gray-800 mb-2">NUS-ISS GPA Calculator</h1>
+        <p class="text-sm sm:text-base text-gray-600 mb-6">Like it or not, predict your future here. (Actually no ML techniques used here lol)</p>
+
+        <form th:action="@{/calculate}" th:object="${gradeForm}" method="post">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Design</label>
+                    <select th:field="*{designGrade}" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-base">
+                        <option value="">Select...</option>
+                        <option value="A+">A+</option>
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="D+">D+</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Development</label>
+                    <select th:field="*{devGrade}" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-base">
+                        <option value="">Select...</option>
+                        <option value="A+">A+</option>
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="D+">D+</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Machine Learning</label>
+                    <select th:field="*{mlGrade}" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-base">
+                        <option value="">Select...</option>
+                        <option value="A+">A+</option>
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="D+">D+</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">ASD</label>
+                    <select th:field="*{asdGrade}" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-base">
+                        <option value="">Select...</option>
+                        <option value="A+">A+</option>
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="D+">D+</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Mobile</label>
+                    <select th:field="*{mobileGrade}" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-base">
+                        <option value="">Select...</option>
+                        <option value="A+">A+</option>
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="D+">D+</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">AD Project</label>
+                    <select th:field="*{capstoneGrade}" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-base">
+                        <option value="">Select...</option>
+                        <option value="A+">A+</option>
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="D+">D+</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-amber-600 hover:bg-amber-950 text-white font-medium py-3 px-4 rounded transition text-base">
+                Calculate GPA
+            </button>
+        </form>
+
+        <!-- Results -->
+        <div th:if="${result != null}" class="mt-8 pt-8 border-t border-gray-200">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div class="bg-neutral-100 rounded-lg p-5 text-center">
+                    <p class="text-sm text-gray-600 mb-1">Current GPA</p>
+                    <p class="text-3xl sm:text-4xl font-bold text-black-600" th:text="${#numbers.formatDecimal(result.currentGPA, 1, 2)}">0.00</p>
+                    <p class="text-xs text-gray-500 mt-1">Design & Development</p>
+                </div>
+
+                <div class="bg-teal-950 rounded-lg p-5 text-center">
+                    <p class="text-sm text-white mb-1">Predicted GPA</p>
+                    <p class="text-3xl sm:text-4xl font-bold text-white" th:text="${#numbers.formatDecimal(result.predictedGPA, 1, 2)}">0.00</p>
+                    <p class="text-xs text-white mt-1">All courses</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-5">
+                <p class="font-medium text-gray-700 mb-3">Your Grades</p>
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600 text-sm sm:text-base">Design:</span>
+                        <span class="font-medium text-sm sm:text-base" th:text="${result.designGrade}">-</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600 text-sm sm:text-base">Development:</span>
+                        <span class="font-medium text-sm sm:text-base" th:text="${result.devGrade}">-</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600 text-sm sm:text-base">Machine Learning:</span>
+                        <span class="font-medium text-sm sm:text-base" th:text="${result.mlGrade}">-</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600 text-sm sm:text-base">ASD:</span>
+                        <span class="font-medium text-sm sm:text-base" th:text="${result.asdGrade}">-</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600 text-sm sm:text-base">Mobile:</span>
+                        <span class="font-medium text-sm sm:text-base" th:text="${result.mobileGrade}">-</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600 text-sm sm:text-base">AD Project:</span>
+                        <span class="font-medium text-sm sm:text-base" th:text="${result.capstoneGrade}">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${result.predictedGPA >= 2.25}"
+                 class="mt-4 bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                <p class="text-green-700 font-medium text-sm sm:text-base">✓ You'll Pass</p>
+            </div>
+            <div th:unless="${result.predictedGPA >= 2.25}"
+                 class="mt-4 bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                <p class="text-red-700 font-medium text-sm sm:text-base">You'll fail - better pack your bags</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
