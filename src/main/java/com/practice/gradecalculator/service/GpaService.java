@@ -5,51 +5,84 @@ import org.springframework.stereotype.Service;
 @Service
 public class GpaService {
 
+    // ===== Module Units =====
+    private static final float DESIGN_UNITS = 8f;
+    private static final float DEV_UNITS = 8f;
+    private static final float MOBILE_UNITS = 8f;
+    private static final float ML_UNITS = 6f;
+    private static final float ASD_UNITS = 4f;
+    private static final float CAPSTONE_UNITS = 6f;
+
+    private static final float CURRENT_TOTAL_UNITS =
+            DESIGN_UNITS + DEV_UNITS + MOBILE_UNITS + ML_UNITS + ASD_UNITS;
+
+    private static final float FINAL_TOTAL_UNITS =
+            CURRENT_TOTAL_UNITS + CAPSTONE_UNITS;
+
+
+    // ===== Convert Grade String → GPA Point =====
     public float gradeToGPA(String grade) {
-        if (grade == null) {
-            return 5f;
-        }
+
+        if (grade == null) return 0f;
 
         switch (grade.toLowerCase().trim()) {
-            case "f":
-                return 0f;
-            case "d":
-                return 1f;
-            case "dpos":
+            case "f": return 0f;
+            case "d": return 1f;
             case "d+":
-                return 1.5f;
-            case "c":
-                return 2f;
-            case "cpos":
+            case "dpos": return 1.5f;
+            case "c": return 2f;
             case "c+":
-                return 2.5f;
-            case "bneg":
+            case "cpos": return 2.5f;
             case "b-":
-                return 3f;
-            case "b":
-                return 3.5f;
-            case "bpos":
+            case "bneg": return 3f;
+            case "b": return 3.5f;
             case "b+":
-                return 4f;
-            case "aneg":
+            case "bpos": return 4f;
             case "a-":
-                return 4.5f;
+            case "aneg": return 4.5f;
             case "a":
-                return 5f;
-            case "apos":
             case "a+":
-                return 5f;
-            default:
-                return 5f;
+            case "apos": return 5f;
+            default: return 0f;
         }
     }
 
-    public float calculateCurrentGPA(float designGPA, float devGPA) {
-        return (designGPA + devGPA) / 2;
+
+    // ===== CURRENT GPA (without capstone) =====
+    public float calculateCurrentGPA(float designGPA,
+                                     float devGPA,
+                                     float mlGPA,
+                                     float asdGPA,
+                                     float mobileGPA) {
+
+        float totalPoints =
+                designGPA * DESIGN_UNITS +
+                        devGPA * DEV_UNITS +
+                        mobileGPA * MOBILE_UNITS +
+                        mlGPA * ML_UNITS +
+                        asdGPA * ASD_UNITS;
+
+        return totalPoints / CURRENT_TOTAL_UNITS;
     }
 
-    public float calculatePredictedGPA(float designGPA, float devGPA, float mlGPA,
-                                       float asdGPA, float mobileGPA, float capstoneGPA) {
-        return (designGPA + devGPA + mlGPA + asdGPA + mobileGPA + capstoneGPA) / 6;
+
+    // ===== PREDICTED GPA (including capstone) =====
+    public float calculatePredictedGPA(float designGPA,
+                                       float devGPA,
+                                       float mlGPA,
+                                       float asdGPA,
+                                       float mobileGPA,
+                                       float capstoneGPA) {
+
+        float totalPoints =
+                designGPA * DESIGN_UNITS +
+                        devGPA * DEV_UNITS +
+                        mobileGPA * MOBILE_UNITS +
+                        mlGPA * ML_UNITS +
+                        asdGPA * ASD_UNITS +
+                        capstoneGPA * CAPSTONE_UNITS;
+
+        return totalPoints / FINAL_TOTAL_UNITS;
     }
+
 }

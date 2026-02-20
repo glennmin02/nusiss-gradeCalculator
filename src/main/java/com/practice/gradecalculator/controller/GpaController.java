@@ -24,7 +24,6 @@ public class GpaController {
 
     @PostMapping("/calculate")
     public String calculateGPA(@ModelAttribute GradeForm gradeForm, Model model) {
-        // Convert grades to GPA
         float designGPA = gpaService.gradeToGPA(gradeForm.getDesignGrade());
         float devGPA = gpaService.gradeToGPA(gradeForm.getDevGrade());
         float mlGPA = gpaService.gradeToGPA(gradeForm.getMlGrade());
@@ -32,10 +31,11 @@ public class GpaController {
         float mobileGPA = gpaService.gradeToGPA(gradeForm.getMobileGrade());
         float capstoneGPA = gpaService.gradeToGPA(gradeForm.getCapstoneGrade());
 
-        // Calculate GPAs
-        float currentGPA = gpaService.calculateCurrentGPA(designGPA, devGPA);
-        float predictedGPA = gpaService.calculatePredictedGPA(designGPA, devGPA, mlGPA,
-                asdGPA, mobileGPA, capstoneGPA);
+        float currentGPA = gpaService.calculateCurrentGPA(
+                designGPA, devGPA, mlGPA, asdGPA, mobileGPA);
+
+        float predictedGPA = gpaService.calculatePredictedGPA(
+                designGPA, devGPA, mlGPA, asdGPA, mobileGPA, capstoneGPA);
 
         // Create result object
         GpaResult result = new GpaResult(
